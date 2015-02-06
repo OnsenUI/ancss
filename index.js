@@ -45,6 +45,30 @@ function parse(css, options) {
   });
 };
 
+/**
+ * @param {String} path
+ * @param {Object} [options]
+ * @param {Function} callback
+ */
+function parseFile(path, options, callback) {
+  if (arguments.length < 3) {
+    callback = options;
+    options = {};
+
+    if (typeof callback !== 'function') {
+      throw 'callback parameter must be a function.';
+    }
+  }
+
+  require('fs').readFile(path, {encoding: 'utf8'}, function(error, css) {
+    if (error) {
+      return callback(error);
+    }
+
+    callback(undefined, parse(css.toString('utf8')));
+  });
+}
+
 function normalizeComment(comment) {
   return comment
     .split(/\n/g)
@@ -55,4 +79,4 @@ function normalizeComment(comment) {
     .replace(/^\n+|\n+ *$/g,'');
 }
 
-module.exports = {parse: parse};
+module.exports = {parse: parse, parseFile: parseFile};
