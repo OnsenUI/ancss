@@ -1,0 +1,16 @@
+{
+  "name": "ancss",
+  "version": "0.0.0-dev",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^3.2.5",
+    "css": "^2.1.0",
+    "extend": "^2.0.0"
+  }
+}
