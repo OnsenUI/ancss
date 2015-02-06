@@ -10,7 +10,8 @@ $ npm install ancss
 
 ## Example
 
-`example.css`
+`example.css`:
+
 ```css
 /**
  * name: Button
@@ -30,18 +31,25 @@ $ npm install ancss
 ```
 
 `example.js`:
+
 ```js
 var ancss = require('ancss');
-var css = require('fs').readFileSync(__dirname + '/example.css', 'utf8').toString('utf8');
 
-ancss.parse(css).forEach(function(doc) {
-  console.log('name: ' + doc.annotation.name);
-  console.log('markup: ' + doc.annotation.markup);
-  console.log('css: \n' + doc.css);
+ancss.parseFile(__dirname + '/example.css', function(error, docs) {
+  if (error) {
+    throw error;
+  }
+
+  docs.forEach(function(doc) {
+    console.log('name: ' + doc.annotation.name);
+    console.log('markup: ' + doc.annotation.markup);
+    console.log('css: \n' + doc.css);
+  });
 });
 ```
 
-result:
+Output:
+
 ```
 $ node example.js
 name: Button
