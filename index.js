@@ -4,15 +4,15 @@ var yaml = require('js-yaml');
 var extend = require('extend');
 
 var defaultOptions = {
-  identifyDoc: function(firstLine) {
-    return firstLine.match(/^ *topdoc *$/);
+  detect: function(firstLine) {
+    return firstLine.match(/^\* *$/);
   }
 };
 
 /**
  * @param {String} css
  * @param {Object} [options]
- * @param {Function} [options.identifyDoc]
+ * @param {Function} [options.detect]
  * @return {Array}
  */
 function parse(css, options) {
@@ -23,27 +23,36 @@ function parse(css, options) {
   var parseResult = cssParse(css);
 
   return parseResult.stylesheet.rules.filter(function(rule) {
-    return rule.type === 'comment' && options.identifyDoc(rule.comment.split(/\n/)[0] || '');
+    if (rule.type === 'comment') {
+      return options.detect(rule.comment.split(/\n/)[0] || '');
+    } 
+    return false;
   }).map(function(rule, index, rules) {
 
-    var text = rule.comment.split(/\n/g).slice(1).join('\n').replace(/\n *\*/g, '\n');
+    var comment = normalizeComment(rule.comment);
     var nextRule = rules[index + 1];
     var css = nextRule
       ? lines.slice(rule.position.end.line, nextRule.position.start.line - 1).join('\n')
       : lines.slice(rule.position.end.line).join('\n');
 
     return {
-      text: text,
-      rawText: rule.comment,
-      yaml: yaml.safeLoad(text),
+      annotation: yaml.safeLoad(comment),
       css: css,
+      comment: comment,
+      rawComment: rule.comment,
       position: rule.position
     };
   });
 };
 
-function normalizeText(str) {
-  return str.replace(/\n *\*/g, '\n');
+function normalizeComment(comment) {
+  return comment
+    .split(/\n/g)
+    .slice(1)
+    .join('\n')
+    .replace(/\n *\*/mg, '\n')
+    .replace(/^ *\*/, '')
+    .replace(/^\n+|\n+ *$/g,'');
 }
 
 module.exports = parse;
