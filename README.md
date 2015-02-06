@@ -1,5 +1,7 @@
 # ancss
 
+[![npm version](https://badge.fury.io/js/ancss.svg)](http://badge.fury.io/js/ancss)
+
 A parser for css annotation with yaml.
 
 ## Installation
