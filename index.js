@@ -55,4 +55,4 @@ function normalizeComment(comment) {
     .replace(/^\n+|\n+ *$/g,'');
 }
 
-module.exports = parse;
+module.exports = {parse: parse};
