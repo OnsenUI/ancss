@@ -1,4 +1,4 @@
-#  ![ancss](./misc/logo.png)
+#  ![ancss](https://raw.githubusercontent.com/anatoo/ancss/master/misc/logo.png)
 
 [![npm version](https://badge.fury.io/js/ancss.svg)](http://badge.fury.io/js/ancss)
 
