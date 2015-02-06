@@ -1,7 +1,7 @@
 {
   "name": "ancss",
-  "version": "0.1.1",
-  "description": "A parser for css annotation.",
+  "version": "0.1.2",
+  "description": "A parser for yaml-annotated css.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
