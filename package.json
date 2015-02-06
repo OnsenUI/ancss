@@ -1,12 +1,12 @@
 {
   "name": "ancss",
-  "version": "0.0.0-dev",
+  "version": "0.1.0",
   "description": "A parser for css annotation.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Mitsunori KUBOTA <anatoo.jp@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "js-yaml": "^3.2.5",
