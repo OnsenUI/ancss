@@ -1,6 +1,6 @@
 {
   "name": "ancss",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A parser for yaml-annotated css.",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,10 @@
   "keywords": ["css", "parser", "annotation", "styleguides"],
   "author": "Mitsunori KUBOTA <anatoo.jp@gmail.com>",
   "license": "MIT",
+  "repository" : {
+    "type" : "git",
+    "url" : "http://github.com/anatoo/ancss.git"
+  },
   "dependencies": {
     "js-yaml": "^3.2.5",
     "css": "^2.1.0",
