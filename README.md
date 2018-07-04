@@ -1,11 +1,11 @@
-#  ![ancss](https://raw.githubusercontent.com/anatoo/ancss/master/misc/logo.png)
+#  ![ancss](https://raw.githubusercontent.com/OnsenUI/ancss/master/misc/logo.png)
 
-[![npm version](https://badge.fury.io/js/ancss.svg)](http://badge.fury.io/js/ancss)
+[![npm version](https://badge.fury.io/js/%40onsenui%2Fancss.svg)](https://www.npmjs.com/package/@onsenui/ancss)
 
 ## Installation
 
 ```
-$ npm install ancss
+$ npm install @onsenui/ancss
 ```
 
 ## Example
