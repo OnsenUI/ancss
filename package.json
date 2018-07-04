@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "js-yaml": "^3.2.5",
-    "css": "^2.1.0",
+    "postcss": "^6.0.23",
     "extend": "^2.0.0"
   }
 }

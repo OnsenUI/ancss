@@ -1,5 +1,4 @@
-
-var cssParse = require('css').parse;
+var postcss = require('postcss');
 var yaml = require('js-yaml');
 var extend = require('extend');
 
@@ -20,27 +19,31 @@ function parse(css, options) {
 
   css = css.replace(/\r/g, '');
   var lines = css.split(/\n/g);
-  var parseResult = cssParse(css);
 
-  return parseResult.stylesheet.rules.filter(function(rule) {
+  var pendingCss = postcss().process(css);
+
+  // Accessing .css forces postcss to work synchronously. So this line is important
+  // even though we don't actually use the result. See https://stackoverflow.com/a/36464396
+  var processedCss = pendingCss.css;
+
+  return pendingCss.root.nodes.filter(function (rule) {
     if (rule.type === 'comment') {
-      return options.detect(rule.comment.split(/\n/)[0] || '');
-    } 
+      return options.detect(rule.text.split(/\n/)[0] || '');
+    }
     return false;
-  }).map(function(rule, index, rules) {
-
-    var comment = normalizeComment(rule.comment);
+  }).map(function (rule, index, rules) {
+    var comment = normalizeComment(rule.text);
     var nextRule = rules[index + 1];
     var css = nextRule
-      ? lines.slice(rule.position.end.line, nextRule.position.start.line - 1).join('\n')
-      : lines.slice(rule.position.end.line).join('\n');
+      ? lines.slice(rule.source.end.line, nextRule.source.start.line - 1).join('\n')
+      : lines.slice(rule.source.end.line).join('\n');
 
     return {
       annotation: yaml.safeLoad(comment),
       css: css,
       comment: comment,
       rawComment: rule.comment,
-      position: rule.position
+      position: rule.source
     };
   });
 };
